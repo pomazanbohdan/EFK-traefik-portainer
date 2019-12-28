@@ -19,7 +19,8 @@ sudo bash preinstall.sh
 ## You domain
 Change all DOMAIN.COM in docker-compose.yaml
 
-## Password
+## Config Traefik
+### Password
 Change password in traefik.http.middlewares.traefik-auth.basicauth.users (now 
 admin:admin)
 - go https://www.htaccesstools.com/htpasswd-generator/
@@ -29,6 +30,14 @@ admin:admin)
  $apr1$gm.YsXfy$HAPYyNAfPECxFGAvxXUeN/ -> $$apr1$$gm.YsXfy$$HAPYyNAfPECxFGAvxXUeN/
  ```
 - paste in  docker-compose.yaml in traefik.http.middlewares.traefik-auth.basicauth.users
+
+### mail
+Change mail in ./traefik/data/traefik.yml
+
+### acme.json
+```dif
+chmod 600 ./traefik/data/acme.json
+```
 
 ## Create network
 ```dif
@@ -41,3 +50,6 @@ sudo docker network create proxy
 ## Note
 - kibana no login/pass
 - Elasticsearch port 80 and not config login/password 
+
+## Portainer
+- del ../portainer/data/DELME before start
