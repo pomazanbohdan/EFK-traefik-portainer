@@ -1,6 +1,7 @@
 # EFK-traefik-portainer
 Elasticsearch, Fluentd, and Kibana (EFK stack) + Traefik docker-compose.yaml files (+ Portainer)
 
+0. bash preinstall.sh (tune server)
 1. Change all DOMAIN.COM
 2. Change password in traefik.http.middlewares.traefik-auth.basicauth.users (now admin:admin)
 - 2.1 go https://www.htaccesstools.com/htpasswd-generator/
