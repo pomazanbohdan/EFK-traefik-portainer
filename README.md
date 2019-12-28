@@ -10,5 +10,5 @@ Elasticsearch, Fluentd, and Kibana (EFK stack) + Traefik docker-compose.yaml fil
 3. "docker network create proxy"
 4. First start traefik and check in browser
 5. After launch AFK stack
-5.1 kibana no login/pass
-5.2 Elasticsearch port 80 and not config login/password
+- 5.1 kibana no login/pass
+- 5.2 Elasticsearch port 80 and not config login/password
