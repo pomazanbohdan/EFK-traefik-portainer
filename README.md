@@ -1,6 +1,8 @@
 # EFK-traefik-portainer
 Elasticsearch, Fluentd, and Kibana (EFK stack) + Traefik docker-compose.yaml files (+ Portainer)
 
+Stars the repository if it is useful to you )
+
 ## Download
 ```dif
 cd /opt
