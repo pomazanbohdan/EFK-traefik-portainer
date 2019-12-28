@@ -36,7 +36,7 @@ sudo docker network create proxy
 ```
 ## Launch
 - First start traefik and check in browser
-- After launch AFK stack
+- After launch EFK stack
 
 ## Note
 - kibana no login/pass
