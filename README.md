@@ -1,4 +1,5 @@
 # EFK-traefik-portainer
+
 Elasticsearch, Fluentd, and Kibana (EFK stack) + Traefik docker-compose.yaml files (+ Portainer)
 
 Stars the repository if it is useful to you )
@@ -52,4 +53,4 @@ sudo docker network create proxy
 - Elasticsearch port 80 and not config login/password 
 
 ## Portainer
-- del ../portainer/data/DELME before start
+- del ./portainer/data/DELME before start
