@@ -1,0 +1,74 @@
+version: "3.0"
+
+services:
+
+  elasticsearch:
+    restart: always
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.1
+    container_name: elasticsearch
+    restart: always
+    networks:
+      - proxy
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.elasticsearch.entrypoints=http"
+      - "traefik.http.routers.elasticsearch.rule=Host(`elasticsearch.DOMAIN.COM`)"
+      - "traefik.http.middlewares.elasticsearch-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.elasticsearch.middlewares=elasticsearch-https-redirect"
+      - "traefik.http.routers.elasticsearch-secure.entrypoints=https"
+      - "traefik.http.routers.elasticsearch-secure.rule=Host(`elasticsearch.DOMAIN.COM`)"
+      - "traefik.http.routers.elasticsearch-secure.tls=true"
+      - "traefik.http.routers.elasticsearch-secure.tls.certresolver=http"
+      - "traefik.http.routers.elasticsearch-secure.service=elasticsearch"
+      - "traefik.http.services.elasticsearch.loadbalancer.server.port=9200"
+      - "traefik.docker.network=proxy"
+    volumes:
+      - ./data/:/usr/share/elasticsearch/data
+      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+
+  kibana:
+    restart: always
+    image: docker.elastic.co/kibana/kibana:7.5.1
+    container_name: kibana
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kibana.entrypoints=http"
+      - "traefik.http.routers.kibana.rule=Host(`kibana.DOMAIN.COM`)"
+      - "traefik.http.middlewares.kibana-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.kibana.middlewares=kibana-https-redirect"
+      - "traefik.http.routers.kibana-secure.entrypoints=https"
+      - "traefik.http.routers.kibana-secure.rule=Host(`kibana.DOMAIN.COM`)"
+      - "traefik.http.routers.kibana-secure.tls=true"
+      - "traefik.http.routers.kibana-secure.tls.certresolver=http"
+      - "traefik.http.routers.kibana-secure.service=kibana"
+      - "traefik.http.services.kibana.loadbalancer.server.port=5601"
+      - "traefik.docker.network=proxy"
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    restart: always
+    image: docker.elastic.co/beats/filebeat:7.5.1
+    container_name: filebeat
+    networks:
+      - proxy
+    volumes:
+      - ./config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./logs:/var/log/traefik
+      - filebeatdata:/usr/share/filebeat/data/
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - kibana
+
+volumes:
+  filebeatdata:
+  
+networks:
+  proxy:
+    external: true
