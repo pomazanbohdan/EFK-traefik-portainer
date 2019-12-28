@@ -1,4 +1,8 @@
-filebeat.inputs: /usr/share/filebeat/data/registry
+filebeat.inputs:
+- type: log
+  paths:
+    - /var/log/system.log
+    - /var/log/wifi.log
 
 filebeat.modules:
   #Filebeat system module consumes logs from host OS through a mounted volume.
