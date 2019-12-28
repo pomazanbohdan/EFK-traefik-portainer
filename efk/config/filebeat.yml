@@ -1,4 +1,4 @@
-filebeat.registry_file: /usr/share/filebeat/data/registry
+filebeat.inputs: /usr/share/filebeat/data/registry
 
 filebeat.modules:
   #Filebeat system module consumes logs from host OS through a mounted volume.
