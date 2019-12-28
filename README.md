@@ -1,15 +1,20 @@
 # EFK-traefik-portainer
 Elasticsearch, Fluentd, and Kibana (EFK stack) + Traefik docker-compose.yaml files (+ Portainer)
 
-0. bash preinstall.sh (tune server)
-1. Change all DOMAIN.COM
-2. Change password in traefik.http.middlewares.traefik-auth.basicauth.users (now admin:admin)
-- 2.1 go https://www.htaccesstools.com/htpasswd-generator/
-- 2.2 gen string for you login password
-- 2.3 double  all $ in hash  password - $apr1$gm.YsXfy$HAPYyNAfPECxFGAvxXUeN/ -> $$apr1$$gm.YsXfy$$HAPYyNAfPECxFGAvxXUeN/
-- 2.3 paste in  docker-compose.yaml in traefik.http.middlewares.traefik-auth.basicauth.users
-3. "docker network create proxy"
+sudo mkdir /opt/containers
+sudo cd /opt/containers
+sudo wget https://github.com/pomazanbohdan/EFK-traefik-portainer/archive/master.zip
+sudo unzip master.zip
+
+1. sudo bash preinstall.sh (tune server)
+2. Change all DOMAIN.COM in docker-compose.yaml
+3. Change password in traefik.http.middlewares.traefik-auth.basicauth.users (now admin:admin)
+- go https://www.htaccesstools.com/htpasswd-generator/
+- gen string for you login password
+- double  all $ in hash  password - $apr1$gm.YsXfy$HAPYyNAfPECxFGAvxXUeN/ -> $$apr1$$gm.YsXfy$$HAPYyNAfPECxFGAvxXUeN/
+- paste in  docker-compose.yaml in traefik.http.middlewares.traefik-auth.basicauth.users
+3. "sudo docker network create proxy"
 4. First start traefik and check in browser
 5. After launch AFK stack
-- 5.1 kibana no login/pass
-- 5.2 Elasticsearch port 80 and not config login/password
+- kibana no login/pass
+- Elasticsearch port 80 and not config login/password
