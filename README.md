@@ -17,4 +17,4 @@ Elasticsearch, Fluentd, and Kibana (EFK stack) + Traefik docker-compose.yaml fil
 - First start traefik and check in browser
 - After launch AFK stack
 -- kibana no login/pass
--- Elasticsearch port 80 and not config login/password
+-- Elasticsearch port 80 and not config login/password 
